@@ -1,36 +1,38 @@
-'use strict.',
+'use strict.';
 
-function Image (name, src) {
+const bag = new Prod ('bag' , 'bag.jpg' );
+const banana = new Prod ('banana' , 'banana.jpg' );
+const bathroom = new Prod ('bathroom' , 'bathroom.jpg' );
+const boots = new Prod ('boots' , 'boots.jpg' );
+const breakfast = new Prod ('breakfast' , 'breakfast.jpg' );
+const bubblegum = new Prod ('bubblegum' , 'bubblegum.jpg' );
+const chair = new Prod ('chair' , 'chair.jpg' );
+const cthulhu = new Prod ('cthulhu' , 'cthulhu.jpg' );
+const dogduck = new Prod ('dogduck' , 'dog-duck.jpg' );
+const dragon = new Prod ('dragon' , 'dragon.jpg' );
+const pen = new Prod ('pen' , 'pen.jpg' );
+const petsweep = new Prod ('petsweep' , 'pet-sweep.jpg' );
+const scissors = new Prod ('scissors' , 'scissors.jpg' );
+const shark = new Prod ('shark' , 'shark.jpg' );
+const sweep = new Prod ('sweep' , 'sweep.jpg' );
+const tauntaun = new Prod ('tauntaun' , 'tauntaun.jpg' );
+const unicorn = new Prod ('unicorn' , 'unicorn.jpg' );
+const usb = new Prod ('usb' , 'usb.jpg' );
+const watercan = new Prod ('watercan' , 'water-can.jpg' );
+const wineglass = new Prod ('wineglass' , 'wine-glass.jpg' );
+
+
+function Prod (name, src) {
     this.name = name,
     this.src = 'images/' + src;
+    // this.clicked = 0;
 };
 
-Image.prototype.create = function () {
+Prod.prototype.create = function () {
     const mainImage = document.getElementById('img-wrapper');
     const img = document.createElement('img');
     img.src = this.src;
     mainImage.appendChild(img);
 };
-
-const bag = new Image ('bag' , 'bag.jpg' );
-const banana = new Image ('banana' , 'banana.jpg' );
-const bathroom = new Image ('bathroom' , 'bathroom.jpg' );
-const boots = new Image ('boots' , 'boots.jpg' );
-const breakfast = new Image ('breakfast' , 'breakfast.jpg' );
-const bubblegum = new Image ('bubblegum' , 'bubblegum.jpg' );
-const chair = new Image ('chair' , 'chair.jpg' );
-const cthulhu = new Image ('cthulhu' , 'cthulhu.jpg' );
-const dogduck = new Image ('dogduck' , 'dog-duck.jpg' );
-const dragon = new Image ('dragon' , 'dragon.jpg' );
-const pen = new Image ('pen' , 'pen.jpg' );
-const petsweep = new Image ('petsweep' , 'pet-sweep.jpg' );
-const scissors = new Image ('scissors' , 'scissors.jpg' );
-const shark = new Image ('shark' , 'shark.jpg' );
-const sweep = new Image ('sweep' , 'sweep.jpg' );
-const tauntaun = new Image ('tauntaun' , 'tauntaun.jpg' );
-const unicorn = new Image ('unicorn' , 'unicorn.jpg' );
-const usb = new Image ('usb' , 'usb.jpg' );
-const watercan = new Image ('watercan' , 'water-can.jpg' );
-const wineglass = new Image ('wineglass' , 'wine-glass.jpg' );
 
 bag.create();

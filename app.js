@@ -28,6 +28,8 @@ function Prod (name, src) {
     // this.clicked = 0;
 };
 
+const imgList = [wineglass , watercan , usb , unicorn , tauntaun , sweep , scissors , petsweep , pen , dragon , dogduck , cthulhu , chair , bubblegum , breakfast , boots, bathroom , banana , bag];
+
 Prod.prototype.create = function () {
     const mainImage = document.getElementById('img-wrapper');
     const img = document.createElement('img');
@@ -36,3 +38,5 @@ Prod.prototype.create = function () {
 };
 
 bag.create();
+shark.create();
+wineglass.create();

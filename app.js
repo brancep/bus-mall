@@ -1,8 +1,5 @@
-'use strict.';
+'use strict';
 
-// for (let i = 0; i < 4; i++) {
-//     Prod();
-// }
 let clicked = 0;
 
 const bag = new Prod ('bag' , 'bag.jpg' );
@@ -26,34 +23,36 @@ const usb = new Prod ('usb' , 'usb.gif' );
 const watercan = new Prod ('watercan' , 'water-can.jpg' );
 const wineglass = new Prod ('wineglass' , 'wine-glass.jpg' );
 
-//// Main function to create the object for the Product.
+
+//// This array is for the math random loop
+const imgList = [wineglass , watercan , usb , unicorn , tauntaun , sweep , scissors , petsweep , pen , dragon , dogduck , cthulhu , chair , bubblegum , breakfast , boots, bathroom , banana , bag , shark];
+
+
 function Prod (name, src) {
     this.name = name,
     this.src = 'images/' + src;
     this.clicked = 0;
 };
 
-//// This array is for the math random loop
-const imgList = [wineglass , watercan , usb , unicorn , tauntaun , sweep , scissors , petsweep , pen , dragon , dogduck , cthulhu , chair , bubblegum , breakfast , boots, bathroom , banana , bag , shark];
-
-//// The random images chosen loop
-for (let i = 0; i < 3; i++) {
-    const randoImg = imgList[Math.floor(Math.random() * imgList.length)];
+function addProdImg () {
     const mainImage = document.getElementById('img-wrapper');
-    const img = document.createElement('img');
-    img.src = randoImg.src;
-    mainImage.appendChild(img);
+    
+    const picArray = [];
+    //// The random images chosen loop
+    for (let i = 0; i < 3; i++) {
+        const randoImg = imgList[Math.floor(Math.random() * imgList.length)];
+        if (picArray.includes(randoImg) === true) {
+            i = i - 1;
+        }
+        else {
+            const img = document.createElement('img');
+            img.src = randoImg.src;
+            mainImage.appendChild(img);
+        }
+    }
 }
 
-
-
-// const clickedImg = document.getElementById('img-wrapper');
-// const imgClass = document.createAttribute('class');
-// imgClass.value = 'test';
-// // clickedImg.addEventListener('click' , clickScore );
-
-
-
+addProdImg();
 
 // function clickScore (e) {
 //     const clickedImg = e.target; 
@@ -65,6 +64,7 @@ for (let i = 0; i < 3; i++) {
 //     }
 // }
 
-// Prod.prototype.clicked = function () {
-//     this.clicked += 1;
-// };
+
+Prod.prototype.clicked = function () {
+    this.clicked += 1;
+};

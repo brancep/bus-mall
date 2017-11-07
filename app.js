@@ -14,10 +14,10 @@ const pen = new Prod ('pen' , 'pen.jpg' );
 const petsweep = new Prod ('petsweep' , 'pet-sweep.jpg' );
 const scissors = new Prod ('scissors' , 'scissors.jpg' );
 const shark = new Prod ('shark' , 'shark.jpg' );
-const sweep = new Prod ('sweep' , 'sweep.jpg' );
+const sweep = new Prod ('sweep' , 'sweep.png' );
 const tauntaun = new Prod ('tauntaun' , 'tauntaun.jpg' );
 const unicorn = new Prod ('unicorn' , 'unicorn.jpg' );
-const usb = new Prod ('usb' , 'usb.jpg' );
+const usb = new Prod ('usb' , 'usb.gif' );
 const watercan = new Prod ('watercan' , 'water-can.jpg' );
 const wineglass = new Prod ('wineglass' , 'wine-glass.jpg' );
 
@@ -28,15 +28,13 @@ function Prod (name, src) {
     // this.clicked = 0;
 };
 
-const imgList = [wineglass , watercan , usb , unicorn , tauntaun , sweep , scissors , petsweep , pen , dragon , dogduck , cthulhu , chair , bubblegum , breakfast , boots, bathroom , banana , bag];
+const imgList = [wineglass , watercan , usb , unicorn , tauntaun , sweep , scissors , petsweep , pen , dragon , dogduck , cthulhu , chair , bubblegum , breakfast , boots, bathroom , banana , bag , shark];
 
-Prod.prototype.create = function () {
+
+for (let i = 0; i < 3; i++) {
+    const randoImg = imgList[Math.floor(Math.random() * imgList.length)];
     const mainImage = document.getElementById('img-wrapper');
     const img = document.createElement('img');
-    img.src = this.src;
+    img.src = randoImg.src;
     mainImage.appendChild(img);
-};
-
-bag.create();
-shark.create();
-wineglass.create();
+}

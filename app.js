@@ -42,25 +42,25 @@ Prod.prototype.wasClicked = function () {
 };
 
 
-//// The creation of the 
-Prod.prototype.addProdImg = function () {
-    const mainImage = document.getElementById('img-wrapper'); 
-    const picArray = [];
-    //// The random images chosen loop
-    for (let i = 0; i < 3; i++) {
-        const randoImg = imgList[Math.floor(Math.random() * imgList.length)];
-        if (picArray.includes(randoImg) === true) {
-            i = i - 1;
-        }
-        else {
-            const img = document.createElement('img');
-            img.src = randoImg.src;
-            img.name = randoImg.name;
-            mainImage.appendChild(img);
-        }
+//// The creation of the images to the DOM.
+const mainImage = document.getElementById('img-wrapper'); 
+const picArray = [];
+//// The random images chosen loop
+for (let i = 0; i < 3; i++) {
+    const randoImg = imgList[Math.floor(Math.random() * imgList.length)];
+    if (picArray.includes(randoImg) === true) {
+        i = i - 1; //// No repeats
     }
-};
+    else {
+        const img = document.createElement('img');
+        img.src = randoImg.src;
+        img.name = randoImg.name;
+        mainImage.appendChild(img);
+    }
+}
 
+
+//// This is for clicking and registering the number.
 const handler = document.getElementById('img-wrapper');
 handler.addEventListener('click' , prodClick);
 
@@ -73,11 +73,15 @@ function prodClick (e) {
         }
     }
     clicked++;
+    if (clicked >= 3) {
+        handler.removeEventListener('click' , alert('You have run out of choices.' + ' Scroll down for results'));
+        draw();
+    }
 };
 
 
 
-function finalChart () {
+function draw() {
     const prodNames = [];
     const clickedData = [];
 
@@ -87,32 +91,33 @@ function finalChart () {
     }
 
     const chartCanvas = document.getElementById('chart');
-    const chartContext = chartCanvas.getContext('2d');
-
+    const context = chartCanvas.getContext('2d');
+    
     const chart = new Chart (
-        chartContext,
+        context,
         {
+            axisX: {
+                title: "Red Color labels",
+                labelFontColor: "red"
+            },
             type: 'bar',
             data: {
                 labels: prodNames,
                 datasets: [
                     {
                         label: 'Number of Clicks',
+                        fontColor: '#1976bc',
                         data: clickedData,
-                        backgroundColor: 'rgba(0, 0, 0, 1)'
+                        backgroundColor: '#ffffff'
                     }
                 ]
             },
             options: {
                 title: {
                     display: true,
-                    text: 'Products Clicked.'
+                    text: 'Products Clicked.',
                 }
             }
         }
     );
 }
-
-// if (){
-
-// }

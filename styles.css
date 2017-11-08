@@ -39,7 +39,8 @@ h3 {
     cursor: pointer;
 }
 
-/* canvas {
-    background: lightblue;
+canvas {
+    width: 100%;
     margin: auto;
-} */
+    padding-top: 100px;
+}

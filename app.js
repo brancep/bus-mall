@@ -27,16 +27,22 @@ const wineglass = new Prod ('wineglass' , 'wine-glass.jpg' );
 //// This array is for the math random loop
 const imgList = [wineglass , watercan , usb , unicorn , tauntaun , sweep , scissors , petsweep , pen , dragon , dogduck , cthulhu , chair , bubblegum , breakfast , boots, bathroom , banana , bag , shark];
 
-
+//// Main constructor function to build out products.
 function Prod (name, src) {
-    this.name = name,
+    this.name = name;
     this.src = 'images/' + src;
     this.clicked = 0;
 };
 
+//// For tracking of clicks on an image.
+Prod.prototype.wasClicked = function () {
+    this.clicked += 1;
+};
+
+
+//// The creation of the 
 function addProdImg () {
-    const mainImage = document.getElementById('img-wrapper');
-    
+    const mainImage = document.getElementById('img-wrapper'); 
     const picArray = [];
     //// The random images chosen loop
     for (let i = 0; i < 3; i++) {
@@ -47,24 +53,23 @@ function addProdImg () {
         else {
             const img = document.createElement('img');
             img.src = randoImg.src;
+            img.name = randoImg.name;
             mainImage.appendChild(img);
         }
     }
 }
-
 addProdImg();
 
-// function clickScore (e) {
-//     const clickedImg = e.target; 
-//     for (let i = 0; i < imgList.length; i ++) {
-//         const clickedClass = Prod.name;
-//         if (imgList[i].name === clickedClass) {
-//             imgList[i].clicked;
-//         }
-//     }
-// }
+const handler = document.getElementById('img-wrapper');
+handler.addEventListener('click' , prodClick);
 
-
-Prod.prototype.clicked = function () {
-    this.clicked += 1;
+function prodClick (e) {
+    const clickScore = e.target;
+    for (let i = 0; i < imgList.length; i ++) {
+        const prodClass = clickScore.name;
+        if (imgList[i].name === prodClass) {
+            imgList[i].wasClicked();
+        }
+    }
+    clicked++;
 };

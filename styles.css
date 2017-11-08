@@ -1,10 +1,11 @@
 body {
-    padding: 120px;
+    padding: 120px 120px 0 120px;
     font-family: sans-serif;
     background-image: url('http://celebrationentertainment.com/wp-content/uploads/2015/07/curtains-3.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     color: white;
 }
 
@@ -35,8 +36,13 @@ h3 {
     height: 100%;
     border: solid 1px rgba(0,0,0,.3);
     padding: 5px;
-    box-shadow: 12px 12px 10px 0 rgba(0,0,0,1);
+    box-shadow: 12px 12px 10px 0 rgba(0,0,0,.4);
     cursor: pointer;
+}
+
+#canvas-wrapper {
+    height: 100%;
+    margin: auto;
 }
 
 canvas {

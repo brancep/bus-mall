@@ -29,41 +29,35 @@ const wineglass = new Prod ('wineglass' , 'wine-glass.jpg' );
 //// This array is for the math random loop
 const imgList = [wineglass , watercan , usb , unicorn , tauntaun , sweep , scissors , petsweep , pen , dragon , dogduck , cthulhu , chair , bubblegum , breakfast , boots, bathroom , banana , bag , shark];
 
-//// Main constructor function to build out products.
-function Prod (name, src) {
-    this.name = name;
-    this.src = 'images/' + src;
-    this.clicked = 0;
-};
-
-//// For tracking of clicks on an image.
-Prod.prototype.wasClicked = function () {
-    this.clicked += 1;
-};
-
 
 //// The creation of the images to the DOM.
-const mainImage = document.getElementById('img-wrapper'); 
-const picArray = [];
-//// The random images chosen loop
-for (let i = 0; i < 3; i++) {
-    const randoImg = imgList[Math.floor(Math.random() * imgList.length)];
-    if (picArray.includes(randoImg) === true) {
-        i = i - 1; //// No repeats
-    }
-    else {
-        const img = document.createElement('img');
-        img.src = randoImg.src;
-        img.name = randoImg.name;
-        mainImage.appendChild(img);
+
+function addItem () {
+    const mainImage = document.getElementById('img-wrapper');
+    const picArray = [];
+    //// The random images chosen loop
+    for (let i = 0; i < 3; i++) {
+        const randoImg = imgList[Math.floor(Math.random() * imgList.length)];
+        if (picArray.includes(randoImg)) {
+            i = i - 1; //// No repeats
+        }
+        else {
+            const img = document.createElement('img');
+            img.src = randoImg.src;
+            img.name = randoImg.name;
+            mainImage.appendChild(img);
+        }
     }
 }
+addItem();
+
 
 
 //// This is for clicking and registering the number.
 const handler = document.getElementById('img-wrapper');
 handler.addEventListener('click' , prodClick);
 
+//// Function for registering the clicks for a Product.
 function prodClick (e) {
     const clickScore = e.target;
     for (let i = 0; i < imgList.length; i ++) {
@@ -72,14 +66,23 @@ function prodClick (e) {
             imgList[i].wasClicked();
         }
     }
+    const refreshItems = clickScore.parentNode;
+    while (refreshItems.hasChildNodes()) {
+        refreshItems.removeChild(refreshItems.lastChild);
+    }
+    addItem();
+
     clicked++;
-    if (clicked >= 3) {
-        handler.removeEventListener('click' , alert('You have run out of choices.' + ' Scroll down for results'));
+    if (clicked >= 10) {
         draw();
     }
-};
+}
 
-function draw() {
+
+
+
+//// Creates the chart at the end.
+function draw () {
     const prodNames = [];
     const clickedData = [];
 
@@ -90,21 +93,17 @@ function draw() {
 
     const chartCanvas = document.getElementById('chart');
     const context = chartCanvas.getContext('2d');
-    
+    Chart.defaults.global.defaultFontColor = '#ffffff';
+
     const chart = new Chart (
         context,
         {
-            axisX: {
-                title: "Red Color labels",
-                labelFontColor: "red"
-            },
             type: 'bar',
             data: {
                 labels: prodNames,
                 datasets: [
                     {
                         label: 'Number of Clicks',
-                        fontColor: '#1976bc',
                         data: clickedData,
                         backgroundColor: '#ffffff'
                     }

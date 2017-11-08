@@ -79,8 +79,6 @@ function prodClick (e) {
     }
 };
 
-
-
 function draw() {
     const prodNames = [];
     const clickedData = [];

@@ -43,7 +43,7 @@ Prod.prototype.wasClicked = function () {
 
 
 //// The creation of the 
-function addProdImg () {
+Prod.prototype.addProdImg = function () {
     const mainImage = document.getElementById('img-wrapper'); 
     const picArray = [];
     //// The random images chosen loop
@@ -59,8 +59,7 @@ function addProdImg () {
             mainImage.appendChild(img);
         }
     }
-}
-addProdImg();
+};
 
 const handler = document.getElementById('img-wrapper');
 handler.addEventListener('click' , prodClick);
@@ -75,3 +74,45 @@ function prodClick (e) {
     }
     clicked++;
 };
+
+
+
+function finalChart () {
+    const prodNames = [];
+    const clickedData = [];
+
+    for ( let i = 0; i < imgList.length; i++ ){
+        prodNames.push(imgList[i].name);
+        clickedData.push(imgList[i].clicked);
+    }
+
+    const chartCanvas = document.getElementById('chart');
+    const chartContext = chartCanvas.getContext('2d');
+
+    const chart = new Chart (
+        chartContext,
+        {
+            type: 'bar',
+            data: {
+                labels: prodNames,
+                datasets: [
+                    {
+                        label: 'Number of Clicks',
+                        data: clickedData,
+                        backgroundColor: 'rgba(0, 0, 0, 1)'
+                    }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Products Clicked.'
+                }
+            }
+        }
+    );
+}
+
+// if (){
+
+// }

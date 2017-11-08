@@ -2,6 +2,8 @@
 
 let clicked = 0;
 
+///main instances.
+
 const bag = new Prod ('bag' , 'bag.jpg' );
 const banana = new Prod ('banana' , 'banana.jpg' );
 const bathroom = new Prod ('bathroom' , 'bathroom.jpg' );

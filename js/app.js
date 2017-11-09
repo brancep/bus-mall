@@ -3,15 +3,16 @@
 let clicked = 0;
 let imgList = [];
 
+//// If the local storage is saved this will check then run the object
 if (localStorage.imgList) {
     const newImgList = JSON.parse(localStorage.imgList);
-
+    //// this will create the object instances again to build on local storage
     for (let i = 0; i < newImgList.length; i++) {
         const newProd = new Prod(newImgList[i].name, newImgList[i].src, newImgList[i].clicked);
         imgList.push(newProd);
     }
-} else {
-
+} else { //// If there is no local storage run through following.
+    //// main instances of products
     const bag = new Prod ('bag' , 'images/bag.jpg' );
     const banana = new Prod ('banana' , 'images/banana.jpg' );
     const bathroom = new Prod ('bathroom' , 'images/bathroom.jpg' );
@@ -33,17 +34,12 @@ if (localStorage.imgList) {
     const watercan = new Prod ('watercan' , 'images/water-can.jpg' );
     const wineglass = new Prod ('wineglass' , 'images/wine-glass.jpg' );
 
-    //// This array is for the math random loop
+    //// Main array for the instances and for local storage loops
     imgList = [wineglass , watercan , usb , unicorn , tauntaun , sweep , scissors , petsweep , pen , dragon , dogduck , cthulhu , chair , bubblegum , breakfast , boots, bathroom , banana , bag , shark];
 }
-///main instances.
 
 
-
-
-
-//// The creation of the images to the DOM.
-
+//// This will create the objects using the random method and append them to the DOM through 'img-wrapper'
 function addItem () {
     const mainImage = document.getElementById('img-wrapper');
     const picArray = [];
@@ -67,7 +63,7 @@ addItem();
 //// Function for registering the clicks for a Product.
 const handler = document.getElementById('img-wrapper');
 handler.addEventListener('click' , prodClick);
-
+//// Registers clicks
 function prodClick (e) {
     const clickScore = e.target;
     for (let i = 0; i < imgList.length; i ++) {
@@ -96,22 +92,22 @@ function endSelection(){
     localStorage.setItem('imgList' , JSON.stringify(imgList));
 };
 
-
+//// To populate the Number of Clicks and Product Names on the chart.
+const prodNames = [];
+const clickedData = [];
+//// creating the variables to use in the chart titles
+for ( let i = 0; i < imgList.length; i++ ){
+    prodNames.push(imgList[i].name);
+    clickedData.push(imgList[i].clicked);
+}
 
 //// Creates the chart at the end.
 function draw () {
-    const prodNames = [];
-    const clickedData = [];
-
-    for ( let i = 0; i < imgList.length; i++ ){
-        prodNames.push(imgList[i].name);
-        clickedData.push(imgList[i].clicked);
-    }
-
     const chartCanvas = document.getElementById('chart');
     const context = chartCanvas.getContext('2d');
     Chart.defaults.global.defaultFontColor = '#ffffff';
 
+    //// Chart render info
     const chart = new Chart (
         context,
         {

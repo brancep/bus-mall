@@ -1,33 +1,45 @@
 'use strict';
 
 let clicked = 0;
+let imgList = [];
 
+if (localStorage.imgList) {
+    const newImgList = JSON.parse(localStorage.imgList);
+
+    for (let i = 0; i < newImgList.length; i++) {
+        const newProd = new Prod(newImgList[i].name, newImgList[i].src, newImgList[i].clicked);
+        imgList.push(newProd);
+    }
+} else {
+
+    const bag = new Prod ('bag' , 'images/bag.jpg' );
+    const banana = new Prod ('banana' , 'images/banana.jpg' );
+    const bathroom = new Prod ('bathroom' , 'images/bathroom.jpg' );
+    const boots = new Prod ('boots' , 'images/boots.jpg' );
+    const breakfast = new Prod ('breakfast' , 'images/breakfast.jpg' );
+    const bubblegum = new Prod ('bubblegum' , 'images/bubblegum.jpg' );
+    const chair = new Prod ('chair' , 'images/chair.jpg' );
+    const cthulhu = new Prod ('cthulhu' , 'images/cthulhu.jpg' );
+    const dogduck = new Prod ('dogduck' , 'images/dog-duck.jpg' );
+    const dragon = new Prod ('dragon' , 'images/dragon.jpg' );
+    const pen = new Prod ('pen' , 'images/pen.jpg' );
+    const petsweep = new Prod ('petsweep' , 'images/pet-sweep.jpg' );
+    const scissors = new Prod ('scissors' , 'images/scissors.jpg' );
+    const shark = new Prod ('shark' , 'images/shark.jpg' );
+    const sweep = new Prod ('sweep' , 'images/sweep.png' );
+    const tauntaun = new Prod ('tauntaun' , 'images/tauntaun.jpg' );
+    const unicorn = new Prod ('unicorn' , 'images/unicorn.jpg' );
+    const usb = new Prod ('usb' , 'images/usb.gif' );
+    const watercan = new Prod ('watercan' , 'images/water-can.jpg' );
+    const wineglass = new Prod ('wineglass' , 'images/wine-glass.jpg' );
+
+    //// This array is for the math random loop
+    imgList = [wineglass , watercan , usb , unicorn , tauntaun , sweep , scissors , petsweep , pen , dragon , dogduck , cthulhu , chair , bubblegum , breakfast , boots, bathroom , banana , bag , shark];
+}
 ///main instances.
 
-const bag = new Prod ('bag' , 'bag.jpg' );
-const banana = new Prod ('banana' , 'banana.jpg' );
-const bathroom = new Prod ('bathroom' , 'bathroom.jpg' );
-const boots = new Prod ('boots' , 'boots.jpg' );
-const breakfast = new Prod ('breakfast' , 'breakfast.jpg' );
-const bubblegum = new Prod ('bubblegum' , 'bubblegum.jpg' );
-const chair = new Prod ('chair' , 'chair.jpg' );
-const cthulhu = new Prod ('cthulhu' , 'cthulhu.jpg' );
-const dogduck = new Prod ('dogduck' , 'dog-duck.jpg' );
-const dragon = new Prod ('dragon' , 'dragon.jpg' );
-const pen = new Prod ('pen' , 'pen.jpg' );
-const petsweep = new Prod ('petsweep' , 'pet-sweep.jpg' );
-const scissors = new Prod ('scissors' , 'scissors.jpg' );
-const shark = new Prod ('shark' , 'shark.jpg' );
-const sweep = new Prod ('sweep' , 'sweep.png' );
-const tauntaun = new Prod ('tauntaun' , 'tauntaun.jpg' );
-const unicorn = new Prod ('unicorn' , 'unicorn.jpg' );
-const usb = new Prod ('usb' , 'usb.gif' );
-const watercan = new Prod ('watercan' , 'water-can.jpg' );
-const wineglass = new Prod ('wineglass' , 'wine-glass.jpg' );
 
 
-//// This array is for the math random loop
-const imgList = [wineglass , watercan , usb , unicorn , tauntaun , sweep , scissors , petsweep , pen , dragon , dogduck , cthulhu , chair , bubblegum , breakfast , boots, bathroom , banana , bag , shark];
 
 
 //// The creation of the images to the DOM.
@@ -52,12 +64,10 @@ function addItem () {
 addItem();
 
 
-
-//// This is for clicking and registering the number.
+//// Function for registering the clicks for a Product.
 const handler = document.getElementById('img-wrapper');
 handler.addEventListener('click' , prodClick);
 
-//// Function for registering the clicks for a Product.
 function prodClick (e) {
     const clickScore = e.target;
     for (let i = 0; i < imgList.length; i ++) {
@@ -72,12 +82,19 @@ function prodClick (e) {
     }
     addItem();
 
-    clicked++;
+    clicked++; //// totalling clicks
     if (clicked >= 10) {
-        draw();
+        endSelection();
     }
 }
 
+
+//// LOCAL STORAGE
+function endSelection(){
+    handler.remove();
+    draw();
+    localStorage.setItem('imgList' , JSON.stringify(imgList));
+};
 
 
 

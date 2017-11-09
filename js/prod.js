@@ -1,10 +1,10 @@
 'use strict';
 
 //// Main constructor function to build out products.
-function Prod (name, src) {
+function Prod (name, src, clicked) {
     this.name = name;
-    this.src = 'images/' + src;
-    this.clicked = 0;
+    this.src = src;
+    this.clicked = clicked;
 };
 
 //// For tracking of clicks on an image.

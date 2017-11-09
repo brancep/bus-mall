@@ -34,14 +34,44 @@ h3 {
 #img-wrapper img {
     width: 25%;
     height: 100%;
-    border: solid 1px rgba(0,0,0,.3);
+    border: solid 1px rgba(255,255,255,.3);
     padding: 5px;
     box-shadow: 12px 12px 10px 0 rgba(0,0,0,.4);
     cursor: pointer;
 }
 
+button {
+    padding: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#button-wrapper {
+    text-align: center;
+}
+
+#try-button, 
+#reset-button {
+    margin: 40px 10px;
+    text-align: center;
+    display: inline-block;
+}
+#try {
+    border: solid 2px white;
+    padding: 20px;
+    background: transparent;
+    color: white;
+}
+
+#reset {
+    border: none;
+    background: white;
+    color: black;
+
+}
+
 #canvas-wrapper {
-    height: 100%;
+    height: 300px;
     margin: auto;
 }
 

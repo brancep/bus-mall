@@ -46,6 +46,7 @@ function addItem () {
     //// The random images chosen loop
     for (let i = 0; i < 3; i++) {
         const randoImg = imgList[Math.floor(Math.random() * imgList.length)];
+        // picArray.push(randoImg);
         if (picArray.includes(randoImg)) {
             i = i - 1; //// No repeats
         }
@@ -101,6 +102,7 @@ for ( let i = 0; i < imgList.length; i++ ){
     clickedData.push(imgList[i].clicked);
 }
 
+
 //// Creates the chart at the end.
 function draw () {
     const chartCanvas = document.getElementById('chart');
@@ -123,9 +125,24 @@ function draw () {
                 ]
             },
             options: {
+                borderColor: [
+                    'rgba(0,0,0,1)'
+                ],
+                borderWidth: 10,
                 title: {
                     display: true,
                     text: 'Products Clicked.',
+                    fontSize: 25,
+                    fontStyle: 'bold',
+                    fontColor: 'red',
+                    padding: 10,
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 }
             }
         }

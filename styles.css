@@ -14,13 +14,14 @@ h1 {
     margin-top: 20px;
     margin-bottom: 0;
     text-align: center;
-    text-shadow: 5px 2px 10px 3px black;
+    color: red;
+    text-shadow: 5px 2px 10px white;
 }
 
 h3 {
     margin: 0;
     padding-bottom: 40px;
-    font-size: 40px;
+    font-size: 25px;
     text-align: center;
 }
 
@@ -40,37 +41,8 @@ h3 {
     cursor: pointer;
 }
 
-button {
-    padding: 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#button-wrapper {
-    text-align: center;
-}
-
-#try-button, 
-#reset-button {
-    margin: 40px 10px;
-    text-align: center;
-    display: inline-block;
-}
-#try {
-    border: solid 2px white;
-    padding: 20px;
-    background: transparent;
-    color: white;
-}
-
-#reset {
-    border: none;
-    background: white;
-    color: black;
-
-}
-
 #canvas-wrapper {
+    position: relative;
     height: 300px;
     margin: auto;
 }
@@ -79,4 +51,8 @@ canvas {
     width: 100%;
     margin: auto;
     padding-top: 100px;
+}
+
+.chartjs-render-monitor {
+    padding-top: 10px;
 }

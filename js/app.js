@@ -10,6 +10,7 @@ if (localStorage.imgList) {
     for (let i = 0; i < newImgList.length; i++) {
         const newProd = new Prod(newImgList[i].name, newImgList[i].src, newImgList[i].clicked);
         imgList.push(newProd);
+        console.log(newProd);
     }
 } else { //// If there is no local storage run through following.
     //// main instances of products
@@ -45,9 +46,9 @@ function addItem () {
     const picArray = [];
     //// The random images chosen loop
     for (let i = 0; i < 3; i++) {
+        ///////
         const randoImg = imgList[Math.floor(Math.random() * imgList.length)];
-        // picArray.push(randoImg);
-        if (picArray.includes(randoImg)) {
+        if (picArray.includes(randoImg.name)) {
             i = i - 1; //// No repeats
         }
         else {
@@ -55,6 +56,7 @@ function addItem () {
             img.src = randoImg.src;
             img.name = randoImg.name;
             mainImage.appendChild(img);
+            localStorage.setItem('imgList' , JSON.stringify(imgList));
         }
     }
 }
@@ -67,35 +69,42 @@ handler.addEventListener('click' , prodClick);
 //// Registers clicks
 function prodClick (e) {
     const clickScore = e.target;
+
+    if (clickScore.id === 'img-wrapper') return;
+
     for (let i = 0; i < imgList.length; i ++) {
-        const prodClass = clickScore.name;
-        if (imgList[i].name === prodClass) {
+        const prodName = clickScore.name;
+        if (imgList[i].name === prodName) {
             imgList[i].wasClicked();
+            console.log(imgList[i]);
         }
     }
+    clicked++; //// totalling clicks
+
     const refreshItems = clickScore.parentNode;
     while (refreshItems.hasChildNodes()) {
         refreshItems.removeChild(refreshItems.lastChild);
     }
     addItem();
 
-    clicked++; //// totalling clicks
-    if (clicked >= 10) {
-        endSelection();
+    if (clicked >= 3) {
+        draw();
+        handler.remove();
     }
 }
 
 
-//// LOCAL STORAGE
-function endSelection(){
-    handler.remove();
-    draw();
-    localStorage.setItem('imgList' , JSON.stringify(imgList));
-};
+
+//////////////////////
+
+//  CHART RENDERING  //
+
+//////////////////////
 
 //// To populate the Number of Clicks and Product Names on the chart.
 const prodNames = [];
 const clickedData = [];
+
 //// creating the variables to use in the chart titles
 for ( let i = 0; i < imgList.length; i++ ){
     prodNames.push(imgList[i].name);
@@ -107,10 +116,10 @@ for ( let i = 0; i < imgList.length; i++ ){
 function draw () {
     const chartCanvas = document.getElementById('chart');
     const context = chartCanvas.getContext('2d');
-    Chart.defaults.global.defaultFontColor = '#ffffff';
+    Chart.defaults.global.defaultFontColor = '#ffffff'; // eslint-disable-line
 
     //// Chart render info
-    const chart = new Chart (
+    const chart = new Chart (// eslint-disable-line
         context,
         {
             type: 'bar',
